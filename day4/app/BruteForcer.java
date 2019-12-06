@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class BruteForcer {
+class BruteForcer {
     private int lowerLimit;
     private int upperLimit;
     private int counter1 = 0;
@@ -13,7 +13,7 @@ public class BruteForcer {
 
     private List<Integer> rule2CompliantPasscodes;
 
-    public BruteForcer(int lowerLimit, int upperLimit) {
+    BruteForcer(int lowerLimit, int upperLimit) {
         this.lowerLimit = lowerLimit;
         this.upperLimit = upperLimit;
         rule1CompliantPasscodes = new ArrayList<>();
@@ -24,7 +24,7 @@ public class BruteForcer {
      * 1) At least 1 double digit
      * 2) Only ascending digits
      */
-    public void findCompliantPasswords() {
+    void findCompliantPasswords() {
         IntStream.rangeClosed(lowerLimit, upperLimit).forEach(this::match);
         rule1CompliantPasscodes.forEach(this::matchPart2);
     }
@@ -41,11 +41,9 @@ public class BruteForcer {
             }
             // Check for triple digits
             if (digits[j]==digits[j+1]) {
-                if (j + 2 < digits.length) {
-                    if (digits[j] == digits[j + 2]) {
-                        hasTriple = true;
-                        tripleValue = digits[j];
-                    }
+                if (j + 2 < digits.length && digits[j] == digits[j + 2]) {
+                    hasTriple = true;
+                    tripleValue = digits[j];
                 }
                 if (digits[j] != tripleValue) {
                     hasDifferentDouble = true;
@@ -85,19 +83,19 @@ public class BruteForcer {
         }
     }
 
-    public List<Integer> getRule1CompliantPasscodes() {
+    List<Integer> getRule1CompliantPasscodes() {
         return rule1CompliantPasscodes;
     }
 
-    public List<Integer> getRule2CompliantPasscodes() {
+    List<Integer> getRule2CompliantPasscodes() {
         return rule2CompliantPasscodes;
     }
 
-    public int getCounter1() {
+    int getCounter1() {
         return counter1;
     }
 
-    public int getCounter2() {
+    int getCounter2() {
         return counter2;
     }
 }
